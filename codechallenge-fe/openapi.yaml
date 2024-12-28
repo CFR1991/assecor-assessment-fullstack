@@ -1,0 +1,175 @@
+openapi: 3.0.3
+info:
+  description: The API of Codechallenge
+  title: Codechallenge API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /persons:
+    get:
+      operationId: getPersons
+      description: gives a list of all persons.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PersonDto'
+                type: array
+          description: OK
+      tags:
+        - Person
+      x-accepts: application/json
+      x-tags:
+        - tag: Person
+    post:
+      operationId: addPerson
+      description: Adds a person.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonDto'
+          description: OK
+      tags:
+        - Person
+      x-accepts: application/json
+      x-tags:
+        - tag: Person
+  /persons/{id}:
+    get:
+      operationId: getPersonById
+      description: gives the person for the id.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            format: int64
+            type: integer
+          required: true
+          description: id
+          example: 234
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/PersonDto'
+          description: OK
+      tags:
+        - Person
+      x-accepts: application/json
+      x-tags:
+        - tag: Person
+  /persons/colour/{colour}:
+    get:
+      operationId: getPersonsByColour
+      description: gives a list of all persons for the given colour
+      parameters:
+        - in: path
+          name: colour
+          schema:
+            type: string
+          required: true
+          description: colour filter
+          example: rot
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PersonDto'
+                type: array
+          description: OK
+      tags:
+        - Person
+      x-accepts: application/json
+      x-tags:
+        - tag: Person
+  /person-file: 
+    post:
+      operationId: addPersonsFromFile
+      description: Adds a person.
+      requestBody:
+        content:
+         multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PersonDto'
+                type: array
+          description: OK
+      tags:
+        - Person
+      x-accepts: application/json
+      x-tags:
+        - tag: Person
+  /colours:
+    get:
+      operationId: getColours
+      description: Gives a list of all colours.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+          description: OK
+      tags:
+        - Person
+      x-accepts: application/json
+      x-tags:
+        - tag: Person
+components:
+  schemas:
+    PersonDto:
+      properties:
+        id:
+          format: int64
+          type: integer
+          example: 234
+          readOnly: true
+        firstname:
+          type: string
+          example: Max
+        lastname:
+          type: string
+          example: Mustermann
+        colour:
+          type: string
+          example: rot
+        zipcode:
+          type: string
+          example: 13507
+        city:
+          type: string
+          example: Berlin
+      required:
+        - firstname
+        - lastname
+        - colour
+        - zipcode
+        - city
+      type: object

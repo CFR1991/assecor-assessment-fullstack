@@ -1,0 +1,24 @@
+<table matSort (matSortChange)="setSortAndSortData($event)">
+    <thead>
+        <tr class="table-header">
+            <th>#</th>
+            <th mat-sort-header="firstname">Firstname</th>
+            <th mat-sort-header="lastname">Lastname</th>
+            <th mat-sort-header="colour">Favourite colour</th>
+            <th mat-sort-header="zipcode">Zipcode</th>
+            <th mat-sort-header="city">City</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (person of persons; track person.id) {
+        <tr (click)="navigation.goToPersonDetailPage(person.id)">
+            <td>{{ person.id }}</td>
+            <td>{{ person.firstname }}</td>
+            <td>{{ person.lastname }}</td>
+            <td>{{ person.colour }}</td>
+            <td>{{ person.zipcode }}</td>
+            <td>{{ person.city }}</td>
+        </tr>
+        }
+    </tbody>
+</table>

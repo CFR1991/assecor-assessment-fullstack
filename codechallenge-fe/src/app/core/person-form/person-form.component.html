@@ -1,0 +1,58 @@
+<form [formGroup]="personForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="firstname">Firstname</label>
+        <input id="firstname" formControlName="firstname">
+        <div class="error" *ngIf="personForm.controls['firstname'].invalid && personForm.controls['firstname'].touched">
+            <small *ngIf="personForm.controls['firstname'].errors?.['required']">First Name is required.</small>
+            <small *ngIf="personForm.controls['firstname'].errors?.['maxlength']">First Name is too long.</small>
+        </div>
+    </div>
+
+    <div>
+        <label for="lastname">Lastname</label>
+        <input id="lastname" formControlName="lastname">
+        <div class="error" *ngIf="personForm.controls['lastname'].invalid && personForm.controls['lastname'].touched">
+            <small *ngIf="personForm.controls['lastname'].errors?.['required']">Last Name is required.</small>
+            <small *ngIf="personForm.controls['lastname'].errors?.['maxlength']">Last Name is too long.</small>
+        </div>
+    </div>
+
+    <div>
+        <label for="colour">Colour</label>
+        <select id="colourSelect" title="Wähle eine Farbe:" formControlName="colour">
+            @for (colour of coloursDropdown; track colour.label){
+            <option [value]="colour.value">
+                {{ colour.label }}
+            </option>
+            }
+        </select>
+        <div class="error" *ngIf="personForm.controls['colour'].invalid && personForm.controls['colour'].touched">
+            <small *ngIf="personForm.controls['colour'].errors?.['required']">Colour is required.</small>
+        </div>
+    </div>
+
+    <div>
+        <label for="zipcode">Zipcode</label>
+        <input id="zipcode" formControlName="zipcode">
+        <div class="error" *ngIf="personForm.controls['zipcode'].invalid && personForm.controls['zipcode'].touched">
+            <small *ngIf="personForm.controls['zipcode'].errors?.['required']">Zipcode is required.</small>
+            <small *ngIf="personForm.controls['zipcode'].errors?.['invalid']">Zipcode must be exactly 5 digits.</small>
+        </div>
+    </div>
+
+    <div>
+        <label for="city">City</label>
+        <input id="city" formControlName="city">
+        <div class="error" *ngIf="personForm.controls['city'].invalid && personForm.controls['city'].touched">
+            <small *ngIf="personForm.controls['city'].errors?.['required']">Colour is required.</small>
+            <small *ngIf="personForm.controls['city'].errors?.['maxlength']">Colour is too long.</small>
+        </div>
+    </div>
+
+    <div>
+        @if(disabled==false){
+        <button type="submit" [disabled]="personForm.invalid">Submit</button>
+        }
+        <button (click)="navigation.goToPersonOverviewPage()">{{backButtonTitle}}</button>
+    </div>
+</form>

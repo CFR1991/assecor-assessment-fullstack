@@ -1,0 +1,7 @@
+@if(showErrorModal$ | async){
+<div class="modal">
+    <h2>Error</h2>
+    <p>{{ errorMessage$ | async }}</p>
+    <button (click)="close()">Close</button>
+</div>
+}

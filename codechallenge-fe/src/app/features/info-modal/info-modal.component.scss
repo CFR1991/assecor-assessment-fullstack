@@ -1,0 +1,12 @@
+.modal {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  min-width: 500px;
+  background-color: green;
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 20;
+}

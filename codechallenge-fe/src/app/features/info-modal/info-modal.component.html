@@ -1,0 +1,7 @@
+@if(showInfoModal$ | async){
+<div class="modal">
+    <h2>Info</h2>
+    <p>{{ infoMessage$ | async }}</p>
+    <button (click)="close()">Close</button>
+</div>
+}

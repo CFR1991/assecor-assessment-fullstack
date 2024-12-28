@@ -1,0 +1,8 @@
+<h1>{{title}}</h1>
+<button (click)="navigation.goToCreatePersonPage()">Add Person</button>
+<div>
+    <app-colour-filter class="colour-container" *ngIf="colours$ | async as colours" [colours]="colours" (filterSubmit)="reloadPersonList($event)"/>
+    <div *ngIf="persons$ | async as persons" class="table-container">
+        <app-person-table [persons]="persons" />
+    </div>
+</div>

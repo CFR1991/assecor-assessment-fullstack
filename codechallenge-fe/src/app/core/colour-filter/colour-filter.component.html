@@ -1,0 +1,10 @@
+<div class="colour-dropdown">
+    <label for="colourSelect">Choose colour:</label>
+    <select id="colourSelect" [formControl]="colourControl" (change)="filterList()">
+        @for (colour of coloursDropdown; track colour.label){
+        <option [value]="colour.value">
+            {{ colour.label }}
+        </option>
+        }
+    </select>
+</div>
